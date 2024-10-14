@@ -69,11 +69,11 @@ def estimate_pose(
     # Step 2: Calculate the forward displacement (center distance) and the change in orientation
     d_A_k = (d_right + d_left) / 2  # Average displacement of both wheels
     delta_theta_k = (d_right - d_left) / baseline  # Change in orientation
-
+    theta_curr = theta_prev + delta_theta_k
     # Step 3: Update the robot's position (x, y) in the world frame
-    x_curr = x_prev + d_A_k * np.cos(theta_prev)
-    y_curr = y_prev + d_A_k * np.sin(theta_prev)
+    x_curr = x_prev + d_A_k * np.cos(theta_curr)
+    y_curr = y_prev + d_A_k * np.sin(theta_curr)
 
     # Step 4: Update the robot's heading (orientation)
-    theta_curr = theta_prev + delta_theta_k
+    
     return x_curr, y_curr, theta_curr
